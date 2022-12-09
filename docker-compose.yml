@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  php-apache:
+    container_name: php-apache2
+    image: php-for-dwes
+    depends_on:
+      - db
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - 8000:80
+
+  db:
+    container_name: database
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: "dwes"
+      MARIADB_DATABASE: "dwes"
+      MARIADB_USER: "dwes"
+      MARIADB_PASSWORD: "dwes"
+    volumes:
+      - ./mariadbdata:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    container_name: adminer2
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  mariadbdata:
+    driver: local
