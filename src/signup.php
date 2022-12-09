@@ -25,6 +25,8 @@ session_start();
 
 require 'utils/consultas.php';
 
+$usuario = $_SESSION && isset($_SESSION['usuario']) ? htmlspecialchars($_SESSION['usuario']) : null;
+
 //Si el usuario ya está logueado, lo mandamos al index
 if (isset($_SESSION['usuario'])) {
     echo "<p>Ya estás logueado!</p>";
@@ -101,10 +103,11 @@ if ($_POST && isset($_POST['nombre']) && isset($_POST['clave']) && isset($_POST[
     }
 }
 
-
+//Si hay post y hay contenido, lo sanea, si no, devuelve un espacio en blanco
 $nombreTemp = $_POST && isset($_POST['nombre']) ? htmlspecialchars(trim($_POST['nombre'])) : '';
 $claveTemp = $_POST && isset($_POST['clave']) ? htmlspecialchars(trim($_POST['clave'])) : '';
 $repetir_claveTemp = $_POST && isset($_POST['repite_clave']) ? htmlspecialchars(trim($_POST['repite_clave'])) : '';
+
 
 
 
@@ -119,6 +122,7 @@ $repetir_claveTemp = $_POST && isset($_POST['repite_clave']) ? htmlspecialchars(
  *         correspondiente.
  */
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,6 +135,29 @@ $repetir_claveTemp = $_POST && isset($_POST['repite_clave']) ? htmlspecialchars(
 <?php if(!$_POST || ($_POST && ($errores['nombre'] != null || 
                                 $errores['clave'] != null || 
                                 $errores['repite_clave'] != null))) { ?>
+<?php 
+//Menu Principal
+echo "<h1>Galería de imágenes</h1>";
+if ($usuario == null) {
+    echo <<<END
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="filter.php">Filtrar imágenes</a></li>
+            <li><a href="signup.php"><b>Regístrate</a></b></li>
+            <li><a href="login.php">Iniciar sesión</a></li>
+        </ul>
+    END;
+} else {
+    return <<<END
+        <ul>
+            <li><strong>Home</strong></li>
+            <li><a href="add.php">Añadir imagen</a></li>
+            <li><a href="filter.php">Filtrar imágenes</a></li>
+            <li><a href="logout.php">Cerrar sesión ($usuario)</a></li>
+        </ul>
+    END;
+}
+?>
 <h1>Regístrate</h1>
 <form action="#" method="post">
     <p>

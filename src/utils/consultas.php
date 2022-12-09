@@ -34,7 +34,15 @@ function existeUsuario($nombre){
         return[];
     }
 
-    $existe = $mysqli->affected_rows > 0;
+    //Obtenemos los resultados
+    $resultado = $consulta->get_result();
+    if (!$resultado) {
+        echo "Error al obtener los resultados.";
+        $consulta->close();
+        return[];
+    }
+    //Si devuelve una columna, el usuario existe
+    $existe = $resultado->num_rows > 0;  
 
     return $existe;
 }

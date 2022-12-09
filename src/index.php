@@ -25,9 +25,10 @@ echo "<h1>Galería de imágenes</h1>";
 if ($usuario == null) {
     echo <<<END
         <ul>
-            <li><strong>Home</strong></li>
+            <li><a href="index.php"><b>Home</b></a></li>
             <li><a href="filter.php">Filtrar imágenes</a></li>
             <li><a href="signup.php">Regístrate</a></li>
+            <li><a href="login.php">Iniciar sesión</a></li>
         </ul>
     END;
 } else {
@@ -36,7 +37,7 @@ if ($usuario == null) {
             <li><strong>Home</strong></li>
             <li><a href="add.php">Añadir imagen</a></li>
             <li><a href="filter.php">Filtrar imágenes</a></li>
-            <li><a href="signup.php">Cerrar sesión ($usuario)</a></li>
+            <li><a href="logout.php">Cerrar sesión ($usuario)</a></li>
         </ul>
     END;
 }
