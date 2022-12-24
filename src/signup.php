@@ -30,7 +30,7 @@ $usuario = $_SESSION && isset($_SESSION['usuario']) ? htmlspecialchars($_SESSION
 //Si el usuario ya está logueado, lo mandamos al index
 if (isset($_SESSION['usuario'])) {
     echo "<p>Ya estás logueado!</p>";
-    echo "<li><a href='login.php'>Pulsa aqui para iniciar sesión</a></li>";
+    echo "<li><a href='index.php'>Pulsa aqui para ir al inicio</a></li>";
 }
 
 //Funcion para validar el nombre y las contraseñas

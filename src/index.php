@@ -32,7 +32,7 @@ if ($usuario == null) {
         </ul>
     END;
 } else {
-    return <<<END
+    echo <<<END
         <ul>
             <li><strong>Home</strong></li>
             <li><a href="add.php">Añadir imagen</a></li>
